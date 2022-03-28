@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dicom-edit
+spec:
+  template:
+    spec:
+      containers:
+      - name: dicom-edit-example
+        image: dandric/dicom-edit-example:latest
+        env:
+          - name: SFTP_URI
+            value: "demo@10.106.49.30"
+          - name: PASS
+            value: "demo"
+          - name: FILENAME
+            value: "0002.DCM"
+          - name: SFTP_PORT
+            value: "22"
+      restartPolicy: Never
+  backoffLimit: 4
